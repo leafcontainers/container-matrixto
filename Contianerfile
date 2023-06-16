@@ -1,9 +1,8 @@
 FROM docker.io/library/node:current-alpine
 
-RUN apk add bash git
 
 COPY ./builder.sh /tmp/builder.sh
-RUN bash /tmp/builder.sh
+RUN sh /tmp/builder.sh
 
 RUN rm -rf /tmp/* 
 RUN mkdir -p /tmp
