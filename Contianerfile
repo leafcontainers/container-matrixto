@@ -1,4 +1,4 @@
-FROM docker.io/library/node/current-alpine
+FROM docker.io/library/node:current-alpine
 
 COPY ./builder.sh /tmp/builder.sh
 RUN /tmp/builder.sh
