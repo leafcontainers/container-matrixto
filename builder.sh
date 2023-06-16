@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -ouex pipefail
 
-apk add git
-
 source="https://github.com/matrix-org/matrix.to.git"
 latestTag=$(git -c 'versionsort.suffix=-' \
   ls-remote \
