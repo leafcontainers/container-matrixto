@@ -7,6 +7,6 @@ RUN rm -rf /tmp/*
 RUN mkdir -p /tmp
 RUN chmod -R 1777 /tmp
 
-WORKDIR /opt/matrix_io/
+WORKDIR /opt/matrix_to/
 EXPOSE 5000
 CMD ["yarn", "start"]
