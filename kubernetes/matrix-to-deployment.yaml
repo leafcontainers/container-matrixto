@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: ./kompose convert
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: matrix-to
+  name: matrix-to
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: matrix-to
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: ./kompose convert
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/container-matrixto-default: "true"
+        io.kompose.service: matrix-to
+    spec:
+      containers:
+        - image: ghcr.io/leafcontainers/container-matrixto:nightly
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:5000
+            failureThreshold: 3
+            initialDelaySeconds: 60
+            periodSeconds: 90
+            timeoutSeconds: 10
+          name: matrix-to
+          ports:
+            - containerPort: 5000
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/matrix_to
+              name: matrixto-data
+      hostname: matrix_to
+      restartPolicy: Always
+      volumes:
+        - name: matrixto-data
+          persistentVolumeClaim:
+            claimName: matrixto-data
+status: {}
