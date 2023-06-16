@@ -1,12 +1,18 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -ouex pipefail
 
 apk add git
 
-git clone https://github.com/matrix-org/matrix.to /opt/matrix_to
-cd /opt/matrix_to
-git fetch --tags
-latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
-git checkout $latestTag
+source="https://github.com/matrix-org/matrix.to.git"
+latestTag=$(git -c 'versionsort.suffix=-' \
+  ls-remote \
+  --exit-code \
+  --refs \
+  --sort='version:refname' \
+  --tags  ${source} '*.*.*' | \
+  tail --lines=1 | \
+  cut --delimiter='/' --fields=3 )
+git clone -b ${latestTag} ${source} /opt/matrix_to
 
+cd /opt/matrix_to
 yarn
