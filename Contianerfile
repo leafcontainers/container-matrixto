@@ -1,0 +1,8 @@
+FROM docker.io/library/node/current-alpine
+
+COPY ./builder.sh /tmp/builder.sh
+RUN /tmp/builder.sh
+
+RUN rm -rf /tmp/* 
+RUN mkdir -p /tmp
+RUN chmod -R 1777 /tmp
