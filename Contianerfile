@@ -1,8 +1,11 @@
-FROM docker.io/library/node:current-alpine
+FROM docker.io/library/node:current-bookworm
 
+RUN apt update 
+RUN apt upgrade
+RUN apt install git bash
 
 COPY ./builder.sh /tmp/builder.sh
-RUN sh /tmp/builder.sh
+RUN bash /tmp/builder.sh
 
 RUN rm -rf /tmp/* 
 RUN mkdir -p /tmp
