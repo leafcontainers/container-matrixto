@@ -1,0 +1,25 @@
+version: "3"
+
+volumes:
+  matrixto_data:
+  
+services:
+  matrix_to:
+    image: ghcr.io/leafcontainers/container-matrixto:nightly
+    restart: unless-stopped
+    container_name: matrix_to
+    hostname: matrix_to
+    volumes:
+      - matrixto_data:/opt/matrix_to
+    ports:
+      - "5000:5000/tcp"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    #deploy:
+    #  mode: replicated
+    #  replicas: 3
+    #  endpoint_mode: vip
