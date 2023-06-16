@@ -12,7 +12,7 @@ podman pull ghcr.io/leafcontainers/container-matrixto:nightly
 # compose the container stack
 podman-compose --file ./docker-compose.yaml up -d
 
-# check logs
+# check the container stack's logs
 podman-compose --file ./docker-compose.yaml logs -f
 
 # you should now be able to see matrixto runing 
@@ -28,7 +28,7 @@ docker pull ghcr.io/leafcontainers/container-matrixto:nightly
 # compose the contianer stack
 docker compose --file ./docker-compose.yaml up -d || docker-compose --file ./docker-compose.yaml up -d
 
-# check logs
+# check the scontainer tack's logs
 docker compose --file ./docker-compose.yaml logs -f || docker-compose --file ./docker-compose.yaml logs -f
 
 # you should now be able to see matrixto runing
