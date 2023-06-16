@@ -13,6 +13,8 @@ services:
       - matrixto_data:/opt/matrix_to
     ports:
       - "5000:5000/tcp"
+      # alternatively change the default http port e.g.
+      # - "6090:5000/tcp"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000"]
       interval: 1m30s
