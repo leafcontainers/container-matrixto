@@ -1,19 +1,23 @@
 FROM docker.io/library/node:current-bookworm
 
+# dependencies
 RUN apt update 
 RUN apt upgrade -y
 RUN apt install git bash
 
+# build
 COPY ./builder.sh /tmp/builder.sh
 RUN bash /tmp/builder.sh
 
+# cleanup
 RUN apt remove -y git
+RUN apt-get clean -y
+RUN rm -rf /tmp/{*,*.*,.*}
+RUN rm -rf /var/cache/{*,*.*,.*} 
+RUN mkdir -p /tmp /var/cache
+RUN chmod -R 1777 /tmp /var/cache
 
-RUN sudo apt-get clean -y
-RUN rm -rf /tmp/* 
-RUN mkdir -p /tmp
-RUN chmod -R 1777 /tmp
-
+# startup
 WORKDIR /opt/matrix_to/
 EXPOSE 5000
 CMD ["yarn", "start"]
