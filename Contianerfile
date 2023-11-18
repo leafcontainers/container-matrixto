@@ -7,7 +7,7 @@ RUN apt install git bash
 COPY ./builder.sh /tmp/builder.sh
 RUN bash /tmp/builder.sh
 
-RUN apt remove git
+RUN apt remove -y git
 
 RUN rm -rf /tmp/* 
 RUN mkdir -p /tmp
