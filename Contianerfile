@@ -9,6 +9,7 @@ RUN bash /tmp/builder.sh
 
 RUN apt remove -y git
 
+RUN sudo apt-get clean -y
 RUN rm -rf /tmp/* 
 RUN mkdir -p /tmp
 RUN chmod -R 1777 /tmp
