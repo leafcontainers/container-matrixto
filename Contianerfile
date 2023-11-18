@@ -1,7 +1,7 @@
 FROM docker.io/library/node:current-bookworm
 
 RUN apt update 
-RUN apt upgrade
+RUN apt upgrade -y
 RUN apt install git bash
 
 COPY ./builder.sh /tmp/builder.sh
